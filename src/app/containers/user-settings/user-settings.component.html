@@ -1,0 +1,35 @@
+<div class="d-flex justify-content-center align-items-center flex-column">
+    <!-- <div class="user-online-logo-img-container">
+        <img class="user-online-logo-img" [src]="chatService.myProfilePicture" alt="">
+    </div> -->
+    <div class="user-online-logo-img-container d-flex justify-content-center align-items-center">
+        <img *ngIf="chatService.myProfilePicture !== undefined" class="user-online-logo-img" [src]="chatService.myProfilePicture" alt="">
+        <img *ngIf="chatService.myProfilePicture === undefined" class="user-online-logo-img" src="../../../assets/images/48x48.svg" alt="">
+        <label class="file-upload">
+            <input type="file" (change)="onFileSelected($event)" accept="image/*">
+        </label>
+    </div>
+    <div class="settings-group d-flex flex-column justify-content-center align-items-center">
+        <button class="setting-button log-out-button d-flex align-items-center justify-content-center" type="button" (click)="logout()">
+            <p class="setting-text">
+                Log out
+            </p>
+        </button>
+        <button class="setting-button d-flex align-items-center justify-content-center" type="button" (click)="backToHome()">
+            <p class="setting-text">
+                Back to main room
+            </p>
+        </button>
+        <div class="preferences">
+            <button class="setting-button d-flex align-items-center justify-content-center" type="button" (click)="deleteProfilePicture()">
+                <p class="setting-text">
+                    Delete profile picture
+                </p>
+            </button>
+        </div>
+    </div>
+    <div class="footer">
+        <p class="setting-text">{{ infoMessage }}</p>
+    </div>
+</div>
+

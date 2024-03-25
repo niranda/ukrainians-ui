@@ -1,0 +1,277 @@
+@import url('https://fonts.cdnfonts.com/css/kollektif?styles=28732');
+
+.split-right {
+    right: 0;
+    height: 100%;
+    width: 65%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+}
+
+.split-left {
+  height: 100%;
+  width: 35%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  left: 0;
+  background-color: #303B2E;
+}
+
+.chat-section-wrapper {
+    height: 100%;
+    position: fixed;
+    width: 100%;
+}
+
+.button-group {
+    margin: 10px;
+    position: relative;
+}
+
+.main-button {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: transparent;
+    padding: 0;
+}
+
+.main-button + .main-button {
+    margin-left: 10px;
+}
+
+.back-to-main-room-button {
+    width: 88%;
+}
+
+.users-online-section {
+    width: 100%;
+}
+
+.users-online-container {
+    background-color: #fff;
+    padding-bottom: 7px;
+}
+
+.users-online-header {
+    font-family: 'Kollektif', sans-serif;
+    font-size: 22px;
+    color: #505050;
+    letter-spacing: 10px;
+}
+
+.users-online-list-wrapper {
+    margin: 5px 40px;
+}
+
+.user-logo {
+    min-width: 60px;
+    min-height: 60px;
+}
+
+.user-logo + .user-logo {
+    margin-left: 20px;
+}
+
+.user-button {
+    width: 100%;
+    height: 100%;
+}
+
+.message-container {
+    width: 100%;
+}
+
+.message-button {
+    padding: 10px 0;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    position: relative;
+}
+
+.message-button-hover {
+    background-color: #a4bda0;
+}
+
+.message-button:focus {
+    background-color: #667963;
+}
+
+.chat-section {
+    height: 100%;
+}
+
+.chat-container {
+    height: 100%;
+}
+
+.chat-card-body {
+    display: flex;
+    flex-direction: column-reverse;
+    max-height: 95vh;
+    height: 100%;
+    overflow: auto;
+}
+
+.chat-card {
+    height: 100%;
+}
+
+.chat-card-footer {
+    position: fixed;
+    bottom: 0;
+}
+
+.user-online-logo-img-container {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: none;
+}
+
+.user-logo-img-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+}
+
+
+.bg-online {
+    background-image: linear-gradient(to right, #00A651 , #8DC63F);
+}
+
+.user-online-logo-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.user-logo-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.chat-logo-min {
+    margin: 0 10px;
+}
+
+.chat-logo-online {
+    margin: 0 5px;
+}
+
+.user-name {
+    color: #EFEBE0;
+    font-family: 'Kollektif', sans-serif;
+    margin-bottom: 0;
+}
+
+.chat-info {
+    padding-top: 3px;
+    text-align: left;
+    overflow: hidden;
+}
+
+.last-message {
+    margin: 0;
+    color: #fff;
+    font-family: 'Calibri', sans-serif;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.notification {
+    position: absolute;
+    right: 20px;
+    height: 100%;
+    font-family: 'Kollektif', sans-serif;
+    font-size: 40px;
+    color: #fff;
+    opacity: 28%;
+}
+
+.unread-number {
+    margin: 0;
+}
+
+.username {
+    margin: 0;
+}
+
+.back-to-chat-list {
+    display: none;
+}
+
+.main-menu-image {
+    width: 100%; 
+    height: 100%;
+}
+
+.search-input {
+    width: 100%; 
+    height: 30px; 
+    margin-left: 15px;
+}
+
+@media (max-width: 525px) {
+    .split-left {
+        height: 100%;
+        width: 100% !important;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        overflow-x: hidden;
+        left: 0;
+        background-color: #303B2E;
+    }
+
+    .hide-split {
+        display: none;
+    }
+
+    .chat-section-wrapper {
+        height: 100%;
+        position: fixed;
+        width: 100% !important;
+        left: 0 !important;
+    }
+
+    .chat-card-footer {
+        position: fixed;
+        bottom: 0;
+        width: 100% !important;
+    }
+
+    .back-to-chat-list {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30px;
+        height: 30px;
+    }
+
+    .menu-image {
+        width: 100%;
+    }
+
+    .back-to-main-room-button {
+        display: none;
+    }
+
+    .cancel-wrapper {
+        width: 20px;
+    }
+}

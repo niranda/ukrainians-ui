@@ -1,0 +1,13 @@
+<form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
+    <div class="d-flex">
+        <div style="width: 94%;">
+            <input type="text" [(ngModel)]="content" name="content" required class="form-control" placeholder="Send message">
+            <!-- <input *ngIf="chatService.messageEditable" type="text" [(ngModel)]="content" name="content" required class="form-control" placeholder="Send message"> -->
+        </div>
+        <div>
+            <div class="d-grid">
+                <button [disabled]="!messageForm.valid" class="btn btn-dark btn-block" type="submit">{{ editingMessage ? 'Edit' : 'Send' }}</button>
+            </div>
+        </div>
+    </div>
+</form>

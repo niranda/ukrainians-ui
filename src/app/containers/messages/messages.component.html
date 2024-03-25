@@ -1,0 +1,25 @@
+<div class="message-container">
+    <div class="message d-flex" *ngFor="let message of messages" (mouseenter)="hoverMessage(message)" (mouseleave)="hoverMessage(message)">
+        <div class="min-profile-picture">
+            <img class="user-logo-img" [src]="getUserImage(message)" alt="">
+        </div>
+        <div class="message-wrapper"
+        [ngClass]="{'other-person-message-wrapper' : message.from != chatService.myName}">
+            <span class="message-content">{{message.content}} </span>
+            <span class="message-time">{{message.created | date:'HH:mm'}}, {{message.from}}</span>
+            <div class="message-not-read" *ngIf="message.from == chatService.myName"
+            [ngClass]="{'message-read' : !message.unread }">
+            </div>
+        </div>
+        <div class="menu-items align-items-center" [ngClass]="{'d-flex' : message.hovered }">
+            <div *ngIf="message.from == chatService.myName">
+                <a (click)="editMessage(message)" style="margin-right: 10px; cursor: pointer;">
+                    <img src="../../../assets/icons/draw.png" alt="">
+                </a>
+                <a (click)="deleteMessage(message)" style="margin-right: 20px; cursor: pointer;">
+                    <img src="../../../assets/icons/trash-can.png" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

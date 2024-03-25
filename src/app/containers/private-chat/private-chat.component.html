@@ -1,0 +1,6 @@
+<div class="chat-card-body">
+    <app-messages [messages]="chatService.privateMessages"></app-messages>
+</div>
+<div class="chat-card-footer">
+    <app-chat-input (contentEmitter)="sendMessage($event)"></app-chat-input>
+</div>

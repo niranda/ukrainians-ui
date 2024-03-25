@@ -1,0 +1,155 @@
+<ng-container *ngIf="openChat === false">
+    <div class="home-container">
+        <div class="split-left left d-flex justify-content-center align-items-center">
+            <div class="image-wrapper">
+                <img class="logo" src="../../../assets/images/ukrainians.png" alt="">
+            </div>
+        </div>
+        <div class="split-right right d-flex flex-column justify-content-center">
+            <div class="content-right-container">
+                <div class="text-center" *ngIf="!isSignup">
+                    <h1 class="content-right-text">
+                        Давайте з’єднаємо вас і поспілкуємося з іншими людьми <img class="ua-logo" src="../../../assets/images/ua-logo.png" alt="">
+                    </h1>
+                </div>
+                
+                <div class="d-flex justify-content-center">
+                    <div>
+                        <main class="form-signin">
+                            <div class="signup-form" *ngIf="isSignup">
+                                <form class="d-flex align-items-center flex-column" [formGroup]="userSignupForm" (ngSubmit)="submitSignupForm()" autocomplete="off">
+                                    <h3 class="login-text">Sign up <span>or <a style="color: #A6A6A6; cursor: pointer;" (click)="toggleSignupWindow()">log in</a></span></h3> 
+
+                                    <div class="form input-items-group">
+                                        <div class="form-floating mb-3">
+                                            <textarea [(ngModel)]="signupLoginEmailValue" type="text" formControlName="email" class="form-control" placeholder="Email" data-label-animated
+                                            [class.is-invalid]="submittedSignup && userSignupForm.get('email')?.errors"></textarea>
+                                            <label [ngClass]="{'hasValue': signupLoginEmailValue !== ''}" class="form-label" for="email">Email</label>
+
+                                            <span class="text-danger" *ngIf="submittedSignup && userSignupForm.get('email')?.hasError('required')">
+                                                Please enter an email
+                                            </span>
+                                        </div>
+
+                                        <hr class="dotted-line">
+
+                                        <div class="form-floating mb-3">
+                                            <textarea [(ngModel)]="signupLoginTextValue" type="text" formControlName="name" class="form-control" placeholder="Name" data-label-animated
+                                            [class.is-invalid]="submittedSignup && userSignupForm.get('name')?.errors"></textarea>
+                                            <label [ngClass]="{'hasValue': signupLoginTextValue !== ''}" class="form-label" for="name">Name</label>
+
+                                            <span class="text-danger" *ngIf="submittedSignup && userSignupForm.get('name')?.hasError('required')">
+                                                Please enter a name
+                                            </span>
+                                            <span class="text-danger" *ngIf="submittedSignup && userSignupForm.get('name')?.hasError('maxlength') ||
+                                            userSignupForm.get('name')?.hasError('minlength')">
+                                                Your name must be at least 3, and maximum 15 characters
+                                            </span>
+                                        </div>
+
+                                        <hr class="dotted-line">
+                    
+                                        <div class="form-floating mb-3">
+                                            <textarea [(ngModel)]="signupPasswordTextValue" type="password" formControlName="password" class="form-control textarea-pass" placeholder="Password" data-label-animated
+                                                [class.is-invalid]="submittedSignup && userSignupForm.get('password')?.errors"></textarea>
+                                            <label [ngClass]="{'hasValue': signupPasswordTextValue !== ''}" class="form-label" for="password">Password</label>
+
+                                            <span class="text-danger" *ngIf="submittedSignup && userSignupForm.get('password')?.hasError('required')">
+                                                Please create a password
+                                            </span>
+                                            <span class="text-danger" *ngIf="submittedSignup && userSignupForm.get('password')?.hasError('maxlength') ||
+                                            userSignupForm.get('password')?.hasError('minlength')">
+                                                Your password must be at least 6, and maximum 20 characters
+                                            </span>
+                                        </div>
+
+                                        <hr class="dotted-line">
+                
+                                        <div class="form-floating mb-3">
+                                            <textarea [(ngModel)]="confirmPasswordTextValue" type="password" formControlName="confirmPassword" class="form-control textarea-pass" placeholder="confirmPassword" data-label-animated
+                                                [class.is-invalid]="submittedSignup && userSignupForm.get('confirmPassword')?.errors"></textarea>
+                                            <label [ngClass]="{'hasValue': confirmPasswordTextValue !== ''}" class="form-label" for="password">Confirm password</label>
+
+                                            <span class="text-danger" *ngIf="submittedSignup && userSignupForm.get('confirmPassword')?.hasError('required')">
+                                                Please confirm the password
+                                            </span>
+                                            <span class="text-danger" *ngIf="submittedSignup && userSignupForm.get('confirmPassword')?.hasError('notEquivalent')">
+                                                Your passwords don't match
+                                            </span>
+                                        </div>
+                        
+                        
+                                        <div class="form-floating" *ngIf="apiErrorMessages.length > 0">
+                                            <ul class="text-danger">
+                                                <li *ngFor="let error of apiErrorMessages">
+                                                    {{error}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                    
+                                    <div class="d-grid mt-4 px-4">
+                                        <button class="btn btn-warning submit-button" type="submit">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="login-form" *ngIf="!isSignup">
+                                <form class="d-flex align-items-center flex-column" [formGroup]="userLoginForm" (ngSubmit)="submitLoginForm()" autocomplete="off">
+                                    <h3 class="login-text">Log in <span>or <a style="color: #A6A6A6; cursor: pointer;" (click)="toggleSignupWindow()">sign up</a></span></h3> 
+                                    
+                                    <div class="form input-items-group">
+                                        <div class="form-floating mb-3">
+                                            <textarea [(ngModel)]="loginTextValue" type="text" formControlName="name" class="form-control" placeholder="Name" data-label-animated
+                                            [class.is-invalid]="submittedLogin && userLoginForm.get('name')?.errors"></textarea>
+                                            <label [ngClass]="{'hasValue': loginTextValue !== ''}" class="form-label" for="name">Name or email</label>
+                                            <span class="text-danger" *ngIf="submittedLogin && userLoginForm.get('name')?.hasError('required')">
+                                                Please enter a name
+                                            </span>
+                                            <span class="text-danger" *ngIf="submittedLogin && userLoginForm.get('name')?.hasError('maxlength') ||
+                                            userLoginForm.get('name')?.hasError('minlength')">
+                                            Your name must be at least 3, and maximum 15 characters
+                                            </span>                                            
+                                        </div>
+                                        <hr class="dotted-line">
+                                        <div class="form-floating mb-3">
+                                            <textarea [(ngModel)]="passwordTextValue" type="password" formControlName="password" class="form-control textarea-pass" placeholder="Password" data-label-animated
+                                                [class.is-invalid]="submittedLogin && userLoginForm.get('password')?.errors"></textarea>
+                                            <label [ngClass]="{'hasValue': passwordTextValue !== ''}" class="form-label" for="password">Password</label>
+                                            <span class="text-danger" *ngIf="submittedLogin && userLoginForm.get('password')?.hasError('required')">
+                                                Please enter a password
+                                            </span>
+                                            <span class="text-danger" *ngIf="submittedLogin && userLoginForm.get('password')?.hasError('maxlength') ||
+                                            userLoginForm.get('password')?.hasError('minlength')">
+                                                Your password must be at least 6, and maximum 20 characters
+                                            </span>
+                                        </div>
+                        
+                                        <div class="form-floating" *ngIf="apiErrorMessages.length > 0">
+                                            <ul class="text-danger">
+                                                <li *ngFor="let error of apiErrorMessages">
+                                                    {{error}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>               
+                                    <div class="d-grid">
+                                        <button class="submit-button btn btn-warning" type="submit">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <jw-modal id="confirm-email">
+                                <h3 class="modal-header">A confirmation letter has been sent to your email. Follow the link in the letter and confirm your email</h3>
+                                <button class="submit-button btn btn-warning" (click)="closeModal('confirm-email')">Close</button>
+                            </jw-modal>
+                        </main>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</ng-container>
+
+<ng-container *ngIf="openChat === true">
+    <app-chat (closeChatEmitter)="closeChat()"></app-chat>
+</ng-container>

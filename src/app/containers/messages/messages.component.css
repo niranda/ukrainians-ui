@@ -1,0 +1,64 @@
+.message-container {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.min-profile-picture {
+    margin: 2.5px 10px;
+}
+
+.user-logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.message-wrapper {
+  min-width: 200px;
+  max-width: 600px;
+  padding: 3px 15px;
+  margin: 7px 0;
+  background-color: #fff;
+  border-radius: 25px;
+  position: relative;
+}
+
+.other-person-message-wrapper {
+  color: #fff;
+  background-color: #303B2E;
+}
+
+.message-content {
+    font-family: 'Calibri', sans-serif;
+    font-size: 14px;
+}
+
+.message-time {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    font-family: 'Calibri', sans-serif;
+    font-size: 12px;
+    color: #A6A6A6;
+}
+
+.message-not-read {
+  position: absolute;
+  background-color: #38B6FF;
+  border-radius: 25px;
+  width: 100px;
+  height: 31px;
+  right: -10px;
+  top: 0;
+  z-index: -1;
+}
+
+.message-read {
+  background-color: #8DC63F;
+}
+
+.menu-items {
+  display: none;
+  margin-left: 30px;
+}

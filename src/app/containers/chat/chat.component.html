@@ -1,0 +1,104 @@
+    <div class="split-left" [style.width.%]="leftSideWidth" [ngClass]="{'hide-split' : openPrivateConversation}">
+        <section class="button-group d-flex justify-content-between">
+            <button class="main-button" (click)="openMenu()">
+                <img class="main-menu-image" src="../../../assets/icons/menu.png" alt="">
+            </button>
+            <input class="form-control search-input" placeholder="Search" type="search" [(ngModel)]="search">
+        </section>
+        <section class="users-online-section">
+            <div class="users-online-container text-center">
+                <h3 class="users-online-header not-selectable">users online</h3>
+                <div class="users-online-list-wrapper d-flex justify-content-center">
+                    <div class="user-logo" *ngFor="let user of chatService.onlineUsers">
+                        <button type="button" class="bg-online user-online-logo-img-container d-flex align-items-center justify-content-center" 
+                        [ngClass]="{'btn-success' : user.name === chatService.myName, 'btn-dark' : user.name !== chatService.myName}"
+                        (click)="openPrivateChat(user.name)"
+                        [disabled]="user.name === chatService.myName">
+                            <img class="user-online-logo-img" *ngIf="user.name !== chatService.myName" [src]="chatService.getImageFromBytes(user.profilePicture!)" alt="">
+                            <img class="user-online-logo-img" *ngIf="user.name === chatService.myName" [src]="chatService.getImageFromBytes(user.profilePicture!, true)" alt="">
+                        </button>
+                        <p class="username">{{user.name}}</p>
+                    </div>
+                </div>
+            </div>      
+        </section>
+        <section class="messages-section" *ngIf="!toOpenMenu">
+            <div class="messages-container">
+                <div class="messages-list-wrapper">
+                    <div class="message-container" *ngFor="let chat of (chatService.privateChats | filter:search)">
+                        <button type="button" class="message-button d-flex"
+                        [ngClass]="{'message-button-hover' : chat.hovered}"               
+                        (click)="openPrivateChat(chat.user.name)"
+                        (mouseenter)="hoverChat(chat)"
+                        (mouseleave)="hoverChat(chat)"
+                        [disabled]="chat.user.name === chatService.myName">
+                            <div class="chat-logo-min"
+                            [ngClass]="{'d-flex user-logo-img-container bg-online align-items-center justify-content-center chat-logo-online' : chatService.onlineUsers.includes(chat.user) , 'btn-dark' : chat.user.name !== chatService.myName}">
+                                <img class="user-logo-img" [src]="chatService.getImageFromBytes(chat.user.profilePicture)" alt="">
+                            </div>
+                            <div class="chat-info">
+                                <h6 class="user-name">
+                                    {{chat.user.name}}
+                                </h6>
+                                <p class="last-message">{{chat.chatMessage}}</p>
+                            </div>
+                            <div class="cancel-wrapper">
+                                <a href="#">
+                                    <img class="cancel-button" src="../../../assets/icons/cancel.png" alt="">
+                                </a>
+                            </div>
+                            <div class="notification">
+                                <p class="unread-number" *ngIf="chat.unread !== 0">{{chat.unread}}</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="user-settings-section" *ngIf="toOpenMenu">
+            <app-user-settings></app-user-settings>
+        </section>
+    </div>
+    <!-- </div> -->
+    <div class="chat-section-wrapper" [style.left.%]="leftSideWidth" [style.width.%]="rightSideWidth">
+        <section class="chat-section">
+            <div class="chat-container">
+                <div class="chat-card" *ngIf="!openPrivateConversation">
+                    <div class="chat-card-body">
+                        <app-messages [messages]="chatService.messages"></app-messages>
+                    </div>
+                    <div class="chat-card-footer" [style.width.%]="rightSideWidth">
+                        <app-chat-input (contentEmitter)="sendMessage($event)"></app-chat-input>
+                    </div>
+                </div>
+                <div *ngIf="openPrivateConversation" class="chat-card">
+                    <div class="chat-card-body">
+                        <button (click)="backToHome()" class="back-to-chat-list">
+                            <img class="menu-image" src="../../../assets/icons/menu.png" alt="">
+                        </button>
+                        <app-messages [messages]="chatService.privateMessages"></app-messages>
+                    </div>
+                    <div class="chat-card-footer" [style.width.%]="rightSideWidth">
+                        <app-chat-input (contentEmitter)="sendPrivateMessage($event)"></app-chat-input>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- <div class="row mt-3">
+            <div *ngIf="!openPrivateConversation" class="col-lg-9">
+                <div class="card border-secondary">
+                    <div class="card-header h3 text-muted text-center">Messages</div>
+                    <div class="card-body" style="min-height: 500px;">
+                        <app-messages [messages]="chatService.messages"></app-messages>
+                    </div>
+                    <div class="card-footer">
+                        <app-chat-input (contentEmitter)="sendMessage($event)"></app-chat-input>
+                    </div>
+                </div>
+            </div>
+            
+        </div> -->
+    </div>    
+
+
+
